@@ -2,6 +2,8 @@ import vk_api
 from vk_api .keyboard import VkKeyboard, VkKeyboardColor
 from vk_api.longpoll import VkLongPoll, VkEventType
 from config import TOKEN
+from films import FILMS, OPINION, DISRIPTION
+from random import randint
 
 
 def send_message(user_id, message, keyboard=None):
@@ -56,3 +58,25 @@ for event in VkLongPoll(session).listen():
 
             if text == 'Топ 10':
                 pass
+
+    print(event.type)
+
+    if event.type == VkEventType.MESSAGE_NEW:
+        if event.text == "Любой фильм":
+            n = randint(1, 5)
+            if n == 1:
+                send_message(event.user_id, FILMS.get('Фентези'))
+                send_message(event.user_id, OPINION.get(FILMS.get('Фентези')))
+                send_message(event.user_id, DISRIPTION.get(FILMS.get('Фентези')))
+            elif n == 2:
+                send_message(event.user_id, FILMS.get('Романтика'))
+                send_message(event.user_id, OPINION.get(FILMS.get('Романтика')))
+                send_message(event.user_id, DISRIPTION.get(FILMS.get('Романтика')))
+            elif n == 3:
+                send_message(event.user_id, FILMS.get('Боевик'))
+                send_message(event.user_id, OPINION.get(FILMS.get('Боевик')))
+                send_message(event.user_id, DISRIPTION.get(FILMS.get('Боевик')))
+            else:
+                send_message(event.user_id, FILMS.get('Комедия'))
+                send_message(event.user_id, OPINION.get(FILMS.get('Комедия')))
+                send_message(event.user_id, DISRIPTION.get(FILMS.get('Комедия')))
