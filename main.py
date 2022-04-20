@@ -2,7 +2,7 @@ import vk_api
 from vk_api .keyboard import VkKeyboard, VkKeyboardColor
 from vk_api.longpoll import VkLongPoll, VkEventType
 from config import TOKEN
-from films import FILMS, OPINION, DISRIPTION
+from films import FILMS, OPINION, DISRIPTION, TOP_10, TOP_10_OPINION, TOP_10_DISRIPTION, TOP_10_GENRE
 from random import randint
 
 
@@ -67,6 +67,69 @@ for event in VkLongPoll(session).listen():
                 send_message(event.user_id, FILMS.get('Комедия'))
                 send_message(event.user_id, OPINION.get(FILMS.get('Комедия')))
                 send_message(event.user_id, DISRIPTION.get(FILMS.get('Комедия')))
+
+        elif event.text == 'Топ 10':
+
+            send_message(event.user_id, '1')
+            send_message(event.user_id, TOP_10.get('1'))
+            send_message(event.user_id, TOP_10_OPINION.get(TOP_10.get('1')))
+            send_message(event.user_id, TOP_10_GENRE.get(TOP_10.get('1')))
+            send_message(event.user_id, TOP_10_DISRIPTION.get(TOP_10.get('1')))
+
+            send_message(event.user_id, '2')
+            send_message(event.user_id, TOP_10.get('2'))
+            send_message(event.user_id, TOP_10_OPINION.get(TOP_10.get('2')))
+            send_message(event.user_id, TOP_10_GENRE.get(TOP_10.get('2')))
+            send_message(event.user_id, TOP_10_DISRIPTION.get(TOP_10.get('2')))
+
+            send_message(event.user_id, '3')
+            send_message(event.user_id, TOP_10.get('3'))
+            send_message(event.user_id, TOP_10_OPINION.get(TOP_10.get('3')))
+            send_message(event.user_id, TOP_10_GENRE.get(TOP_10.get('3')))
+            send_message(event.user_id, TOP_10_DISRIPTION.get(TOP_10.get('3')))
+
+            send_message(event.user_id, '4')
+            send_message(event.user_id, TOP_10.get('4'))
+            send_message(event.user_id, TOP_10_OPINION.get(TOP_10.get('4')))
+            send_message(event.user_id, TOP_10_GENRE.get(TOP_10.get('4')))
+            send_message(event.user_id, TOP_10_DISRIPTION.get(TOP_10.get('4')))
+
+            send_message(event.user_id, '5')
+            send_message(event.user_id, TOP_10.get('5'))
+            send_message(event.user_id, TOP_10_OPINION.get(TOP_10.get('5')))
+            send_message(event.user_id, TOP_10_GENRE.get(TOP_10.get('5')))
+            send_message(event.user_id, TOP_10_DISRIPTION.get(TOP_10.get('5')))
+
+
+            send_message(event.user_id, '6')
+            send_message(event.user_id, TOP_10.get('6'))
+            send_message(event.user_id, TOP_10_OPINION.get(TOP_10.get('6')))
+            send_message(event.user_id, TOP_10_GENRE.get(TOP_10.get('6')))
+            send_message(event.user_id, TOP_10_DISRIPTION.get(TOP_10.get('6')))
+
+            send_message(event.user_id, '7')
+            send_message(event.user_id, TOP_10.get('7'))
+            send_message(event.user_id, TOP_10_OPINION.get(TOP_10.get('7')))
+            send_message(event.user_id, TOP_10_GENRE.get(TOP_10.get('7')))
+            send_message(event.user_id, TOP_10_DISRIPTION.get(TOP_10.get('7')))
+
+            send_message(event.user_id, '8')
+            send_message(event.user_id, TOP_10.get('8'))
+            send_message(event.user_id, TOP_10_OPINION.get(TOP_10.get('8')))
+            send_message(event.user_id, TOP_10_GENRE.get(TOP_10.get('8')))
+            send_message(event.user_id, TOP_10_DISRIPTION.get(TOP_10.get('8')))
+
+            send_message(event.user_id, '9')
+            send_message(event.user_id, TOP_10.get('9'))
+            send_message(event.user_id, TOP_10_OPINION.get(TOP_10.get('9')))
+            send_message(event.user_id, TOP_10_GENRE.get(TOP_10.get('9')))
+            send_message(event.user_id, TOP_10_DISRIPTION.get(TOP_10.get('9')))
+
+            send_message(event.user_id, '10')
+            send_message(event.user_id, TOP_10.get('10'))
+            send_message(event.user_id, TOP_10_OPINION.get(TOP_10.get('10')))
+            send_message(event.user_id, TOP_10_GENRE.get(TOP_10.get('10')))
+            send_message(event.user_id, TOP_10_DISRIPTION.get(TOP_10.get('10')))
 
         elif event.text == 'Выбрать':
 
