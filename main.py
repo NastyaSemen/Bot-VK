@@ -42,41 +42,62 @@ for event in VkLongPoll(session).listen():
 
             send_message(user_id, 'Выберите интересующий вариант:', keyboard)
 
-            if text == 'Любой фильм':
-                pass
-
-            if text == 'Выбрать':
-                keyboard = VkKeyboard(one_time=True)
-
-                send_message(user_id, 'Какой жанр предпочитаете?')
-                keyboard.add_button('Ужасы', VkKeyboardColor.PRIMARY)
-                keyboard.add_button('Комедия', VkKeyboardColor.PRIMARY)
-                keyboard.add_button('Боевик', VkKeyboardColor.PRIMARY)
-
-                send_message(user_id, 'Выберите интересующий вариант:', keyboard)
-
-
-            if text == 'Топ 10':
-                pass
-
     print(event.type)
 
     if event.type == VkEventType.MESSAGE_NEW:
         if event.text == "Любой фильм":
             n = randint(1, 5)
+
             if n == 1:
                 send_message(event.user_id, FILMS.get('Фентези'))
                 send_message(event.user_id, OPINION.get(FILMS.get('Фентези')))
                 send_message(event.user_id, DISRIPTION.get(FILMS.get('Фентези')))
+
             elif n == 2:
                 send_message(event.user_id, FILMS.get('Романтика'))
                 send_message(event.user_id, OPINION.get(FILMS.get('Романтика')))
                 send_message(event.user_id, DISRIPTION.get(FILMS.get('Романтика')))
+
             elif n == 3:
                 send_message(event.user_id, FILMS.get('Боевик'))
                 send_message(event.user_id, OPINION.get(FILMS.get('Боевик')))
                 send_message(event.user_id, DISRIPTION.get(FILMS.get('Боевик')))
+
             else:
+                send_message(event.user_id, FILMS.get('Комедия'))
+                send_message(event.user_id, OPINION.get(FILMS.get('Комедия')))
+                send_message(event.user_id, DISRIPTION.get(FILMS.get('Комедия')))
+
+        elif event.text == 'Выбрать':
+
+            send_message(event.user_id, 'Какой жанр предпочитаете?')
+
+            keyboard = VkKeyboard(one_time=True)
+            keyboard.add_button('Фэнтези', VkKeyboardColor.PRIMARY)
+            keyboard.add_button('Романтика', VkKeyboardColor.PRIMARY)
+            keyboard.add_button('Боевик', VkKeyboardColor.PRIMARY)
+            keyboard.add_button('Комедия', VkKeyboardColor.PRIMARY)
+
+            send_message(event.user_id, 'Выберите интересующий вариант:', keyboard)
+
+        if event.type == VkEventType.MESSAGE_NEW:
+
+            if event.text == 'Фентези':
+                send_message(event.user_id, FILMS.get('Фентези'))
+                send_message(event.user_id, OPINION.get(FILMS.get('Фентези')))
+                send_message(event.user_id, DISRIPTION.get(FILMS.get('Фентези')))
+
+            elif event.text == 'Романтика':
+                send_message(event.user_id, FILMS.get('Романтика'))
+                send_message(event.user_id, OPINION.get(FILMS.get('Романтика')))
+                send_message(event.user_id, DISRIPTION.get(FILMS.get('Романтика')))
+
+            elif event.text == 'Боевик':
+                send_message(event.user_id, FILMS.get('Боевик'))
+                send_message(event.user_id, OPINION.get(FILMS.get('Боевик')))
+                send_message(event.user_id, DISRIPTION.get(FILMS.get('Боевик')))
+
+            elif event.text == 'Комедия':
                 send_message(event.user_id, FILMS.get('Комедия'))
                 send_message(event.user_id, OPINION.get(FILMS.get('Комедия')))
                 send_message(event.user_id, DISRIPTION.get(FILMS.get('Комедия')))
