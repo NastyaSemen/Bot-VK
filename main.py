@@ -1,12 +1,35 @@
 import vk_api
 from vk_api .keyboard import VkKeyboard, VkKeyboardColor
 from vk_api.longpoll import VkLongPoll, VkEventType
+from vk_api import VkUpload
+import requests
+from vkwave.bots.storage.storages import vk
+import json
+from typing import Optional
+
+from vkwave.api.methods import APIOptionsRequestContext
+from vkwave.bots.storage.base import NO_KEY, AbstractStorage, NoKeyOrValue
+from vkwave.bots.storage.types import Dumper, Key, Loader, Value
+
+
 from config import TOKEN
 from films import FILMS, OPINION, DISRIPTION, TOP_10, TOP_10_OPINION, TOP_10_DISRIPTION, TOP_10_GENRE
 from random import randint
 
+attachment = None
 
-def send_message(user_id, message, keyboard=None):
+
+def send_image(image):
+    global attachment
+    upload = vk_api.VkUpload(vk)
+    photo = upload.photo_messages(image)
+    owner_id = photo[0]['owner_id']
+    photo_id = photo[0]['id']
+    access_key = photo[0]['access_key']
+    attachment = f'photo{owner_id}_{access_key}'
+
+
+def send_message(user_id, message, keyboard=None, attacment=None):
     post = {
         'user_id': user_id,
         'message': message,
@@ -15,6 +38,8 @@ def send_message(user_id, message, keyboard=None):
 
     if keyboard != None:
         post['keyboard'] = keyboard.get_keyboard()
+    if attacment != None:
+        post['attacment'] = ','.join(attacment)
     else:
         post = post
 
@@ -52,6 +77,7 @@ for event in VkLongPoll(session).listen():
                 send_message(event.user_id, FILMS.get('Фентези'))
                 send_message(event.user_id, OPINION.get(FILMS.get('Фентези')))
                 send_message(event.user_id, DISRIPTION.get(FILMS.get('Фентези')))
+                send_image("Веном.jpeg")
 
             elif n == 2:
                 send_message(event.user_id, FILMS.get('Романтика'))
