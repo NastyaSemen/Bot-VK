@@ -71,29 +71,25 @@ for event in VkLongPoll(session).listen():
                 send_message(event.user_id, OPINION.get(FILMS.get('Фентези')))
                 send_message(event.user_id, DISRIPTION.get(FILMS.get('Фентези')))
                 send_image("Веном.jpeg")
-                if FILMS.get('Фентези') not in conector.get_film_offers(event.user_id):
-                    conector.write_film_offer(event.user_id, FILMS.get('Фентези'))
+                conector.write_film_offer(event.user_id, FILMS.get('Фентези'))
 
             elif n == 2:
                 send_message(event.user_id, FILMS.get('Романтика'))
                 send_message(event.user_id, OPINION.get(FILMS.get('Романтика')))
                 send_message(event.user_id, DISRIPTION.get(FILMS.get('Романтика')))
-                if FILMS.get('Романтика') not in conector.get_film_offers(event.user_id):
-                    conector.write_film_offer(event.user_id, FILMS.get('Романтика'))
+                conector.write_film_offer(event.user_id, FILMS.get('Романтика'))
 
             elif n == 3:
                 send_message(event.user_id, FILMS.get('Боевик'))
                 send_message(event.user_id, OPINION.get(FILMS.get('Боевик')))
                 send_message(event.user_id, DISRIPTION.get(FILMS.get('Боевик')))
-                if FILMS.get('Боевик') not in conector.get_film_offers(event.user_id):
-                    conector.write_film_offer(event.user_id, FILMS.get('Боевик'))
+                conector.write_film_offer(event.user_id, FILMS.get('Боевик'))
 
             elif n == 4:
                 send_message(event.user_id, FILMS.get('Комедия'))
                 send_message(event.user_id, OPINION.get(FILMS.get('Комедия')))
                 send_message(event.user_id, DISRIPTION.get(FILMS.get('Комедия')))
-                if FILMS.get('Комедия') not in conector.get_film_offers(event.user_id):
-                    conector.write_film_offer(event.user_id, FILMS.get('Комедия'))
+                conector.write_film_offer(event.user_id, FILMS.get('Комедия'))
 
         elif event.text == 'Топ 10':
 
