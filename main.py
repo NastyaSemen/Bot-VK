@@ -1,20 +1,11 @@
 import vk_api
 from vk_api .keyboard import VkKeyboard, VkKeyboardColor
 from vk_api.longpoll import VkLongPoll, VkEventType
-from vk_api import VkUpload
-import requests
+from random import randint
 from vkwave.bots.storage.storages import vk
-import json
-from typing import Optional
-
-from vkwave.api.methods import APIOptionsRequestContext
-from vkwave.bots.storage.base import NO_KEY, AbstractStorage, NoKeyOrValue
-from vkwave.bots.storage.types import Dumper, Key, Loader, Value
-
-
 from config import TOKEN
 from films import FILMS, OPINION, DISRIPTION, TOP_10, TOP_10_OPINION, TOP_10_DISRIPTION, TOP_10_GENRE
-from random import randint
+from DbConector import DbConector
 
 attachment = None
 
@@ -50,6 +41,8 @@ session = vk_api.VkApi(token=TOKEN)
 
 for event in VkLongPoll(session).listen():
 
+    conector = DbConector()
+
     if event.type == VkEventType.MESSAGE_NEW and event.to_me:
         user_id = event.user_id
         text = event.text.lower()
@@ -78,21 +71,29 @@ for event in VkLongPoll(session).listen():
                 send_message(event.user_id, OPINION.get(FILMS.get('Фентези')))
                 send_message(event.user_id, DISRIPTION.get(FILMS.get('Фентези')))
                 send_image("Веном.jpeg")
+                if FILMS.get('Фентези') not in conector.get_film_offers(event.user_id):
+                    conector.write_film_offer(event.user_id, FILMS.get('Фентези'))
 
             elif n == 2:
                 send_message(event.user_id, FILMS.get('Романтика'))
                 send_message(event.user_id, OPINION.get(FILMS.get('Романтика')))
                 send_message(event.user_id, DISRIPTION.get(FILMS.get('Романтика')))
+                if FILMS.get('Романтика') not in conector.get_film_offers(event.user_id):
+                    conector.write_film_offer(event.user_id, FILMS.get('Романтика'))
 
             elif n == 3:
                 send_message(event.user_id, FILMS.get('Боевик'))
                 send_message(event.user_id, OPINION.get(FILMS.get('Боевик')))
                 send_message(event.user_id, DISRIPTION.get(FILMS.get('Боевик')))
+                if FILMS.get('Боевик') not in conector.get_film_offers(event.user_id):
+                    conector.write_film_offer(event.user_id, FILMS.get('Боевик'))
 
-            else:
+            elif n == 4:
                 send_message(event.user_id, FILMS.get('Комедия'))
                 send_message(event.user_id, OPINION.get(FILMS.get('Комедия')))
                 send_message(event.user_id, DISRIPTION.get(FILMS.get('Комедия')))
+                if FILMS.get('Комедия') not in conector.get_film_offers(event.user_id):
+                    conector.write_film_offer(event.user_id, FILMS.get('Комедия'))
 
         elif event.text == 'Топ 10':
 
@@ -175,18 +176,26 @@ for event in VkLongPoll(session).listen():
                 send_message(event.user_id, FILMS.get('Фентези'))
                 send_message(event.user_id, OPINION.get(FILMS.get('Фентези')))
                 send_message(event.user_id, DISRIPTION.get(FILMS.get('Фентези')))
+                if FILMS.get('Фентези') not in conector.get_film_offers(event.user_id):
+                    conector.write_film_offer(event.user_id, FILMS.get('Фентези'))
 
             elif event.text == 'Романтика':
                 send_message(event.user_id, FILMS.get('Романтика'))
                 send_message(event.user_id, OPINION.get(FILMS.get('Романтика')))
                 send_message(event.user_id, DISRIPTION.get(FILMS.get('Романтика')))
+                if FILMS.get('Романтика') not in conector.get_film_offers(event.user_id):
+                    conector.write_film_offer(event.user_id, FILMS.get('Романтика'))
 
             elif event.text == 'Боевик':
                 send_message(event.user_id, FILMS.get('Боевик'))
                 send_message(event.user_id, OPINION.get(FILMS.get('Боевик')))
                 send_message(event.user_id, DISRIPTION.get(FILMS.get('Боевик')))
+                if FILMS.get('Боевик') not in conector.get_film_offers(event.user_id):
+                    conector.write_film_offer(event.user_id, FILMS.get('Боевик'))
 
             elif event.text == 'Комедия':
                 send_message(event.user_id, FILMS.get('Комедия'))
                 send_message(event.user_id, OPINION.get(FILMS.get('Комедия')))
                 send_message(event.user_id, DISRIPTION.get(FILMS.get('Комедия')))
+                if FILMS.get('Комедия') not in conector.get_film_offers(event.user_id):
+                    conector.write_film_offer(event.user_id, FILMS.get('Комедия'))
